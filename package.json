@@ -10,6 +10,7 @@
     "index.js",
     "Carousel",
     "Container",
+    "Swipable",
     "utils"
   ],
   "scripts": {

@@ -11,6 +11,7 @@
     "!index.js",
     "!Carousel/*.js",
     "!Container/*.js",
+    "!Swipable/*.js",
     "!utils/*.js"
   ],
   "repository": {
