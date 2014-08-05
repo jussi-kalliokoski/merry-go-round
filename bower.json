@@ -1,6 +1,6 @@
 {
   "name": "merry-go-round",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Jussi Kalliokoski <jussi.kalliokoski@gmail.com>",
   "license": "ISC",
   "description": "A carousel component for React.",
