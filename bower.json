@@ -1,0 +1,33 @@
+{
+  "name": "merry-go-round",
+  "version": "0.0.1",
+  "author": "Jussi Kalliokoski <jussi.kalliokoski@gmail.com>",
+  "license": "ISC",
+  "description": "A carousel component for React.",
+  "homepage": "https://github.com/jussi-kalliokoski/merry-go-round",
+  "main": "index.js",
+  "ignore": [
+    "**/*",
+    "!index.js",
+    "!Carousel/*.js",
+    "!Container/*.js",
+    "!Swipable/*.js",
+    "!utils/*.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jussi-kalliokoski/merry-go-round"
+  },
+  "keywords": [
+    "carousel",
+    "react",
+    "reactjs",
+    "component"
+  ],
+  "bugs": {
+    "url": "https://github.com/jussi-kalliokoski/merry-go-round/issues"
+  },
+  "devDependencies": {
+    "es5-shim": "~4.0.1"
+  }
+}
