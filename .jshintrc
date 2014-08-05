@@ -1,0 +1,16 @@
+{
+  "node": true,
+  "browser": true,
+  "onecase": true,
+  "newcap": false,
+  "maxlen": 140,
+  "boss": true,
+  "latedef": true,
+  "noarg": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "undef": true,
+  "strict": true,
+  "trailing": true,
+  "expr": true
+}
