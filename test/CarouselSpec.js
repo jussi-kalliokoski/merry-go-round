@@ -46,7 +46,7 @@ describe("Carousel", function () {
 
     function expectPages (list) {
         expectChildrenByClassName("merry-go-round__page", list.length);
-        var actual = getPages().map(function (page) {
+        var contents = getPages().map(function (page) {
             if ( page.childNodes.length === 0 ) {
                 return null;
             }
@@ -54,7 +54,16 @@ describe("Carousel", function () {
             return getElementsByClassName(page, "dummy")[0].innerHTML;
         });
 
-        expect(actual).to.eql(list);
+        var indices = getPages().map(function (page) {
+            if ( page.childNodes.length === 0 ) {
+                return null;
+            }
+
+            return page.getAttribute("data-index");
+        });
+
+        expect(contents).to.eql(list);
+        expect(indices).to.eql(list);
     }
 
     function expectSliderPosition (x, y) {
