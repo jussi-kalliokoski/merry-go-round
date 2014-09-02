@@ -110,6 +110,7 @@ module.exports = React.createClass({
                 className: this.props.baseClass + "__page",
                 key: buffer.index,
                 style: this.calculatePageStyle(buffer.index),
+                "data-index": buffer.pageIndex,
             }, pageView);
         }.bind(this));
     },
