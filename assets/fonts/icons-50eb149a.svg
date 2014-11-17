@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <font id="icons" horiz-adv-x="256">
+    <font-face font-family="icons"
+      units-per-em="256" ascent="256"
+      descent="0" />
+    <missing-glyph horiz-adv-x="0" />
+    <glyph glyph-name="Container__arrow-left"
+      unicode="&#xE001;"
+      horiz-adv-x="256" d=" M156.639 227.702L56.936 128L156.639 28.298L184.922 56.583L113.504 128L184.922 199.417z" />
+    <glyph glyph-name="Container__arrow-right"
+      unicode="&#xE002;"
+      horiz-adv-x="256" d=" M99.362 28.298L199.064 128L99.362 227.702L71.078 199.417L142.496 128L71.078 56.583z" />
+  </font>
+</defs>
+</svg>

@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head><title>merry-go-round</title><link rel="stylesheet" href="/merry-go-round/assets/css/app-01c6ee16.css"></head><body><div class="wrap"><div id="example"></div><div class="code-examples"><div class="code-examples__tabs"><div class="code-examples__tab code-examples__tab--active">index.jsx</div><div class="code-examples__tab">index.styl</div><div class="clear"></div></div><pre class="language-javascript code-examples__code code-examples__code--active"><code class="language-javascript">"use strict";
+
+require("./index.styl");
+
+var React = require("react");
+var Carousel = require("merry-go-round/Carousel");
+
+var MAX_WIDTH = 1024/*px*/;
+var MARGIN = 16/*px*/;
+var ANIMATION_DURATION = 400/*ms*/;
+var COLORS = [
+    "blue",
+    "green",
+    "red",
+    "cyan",
+    "magenta",
+    "pink",
+    "orange",
+    "maroon",
+    "cornflowerblue",
+    "blanchedalmond",
+    "chartreuse",
+    "olive",
+];
+
+var Page = React.createClass({
+    render () {
+        var boxes = COLORS.map((color, index) => {
+            color = COLORS[(index + this.props.index) % COLORS.length];
+            return (
+                <div
+                    className="box"
+                    key={"box-" + color}
+                    style={{ backgroundColor: color }}
+                >
+                    { this.props.page.text }
+                </div>
+            );
+        });
+
+        return (
+            <div className="page">
+                { boxes }
+            </div>
+        );
+    },
+});
+
+var MyCarousel = React.createClass({
+    getInitialState () {
+        return {
+            screenWidth: window.innerWidth,
+            pageIndex: 0,
+            previousPageIndex: 0,
+        };
+    },
+
+    updateScreenSize () {
+        this.setState({
+            screenWidth: window.innerWidth,
+        });
+    },
+
+    componentDidMount () {
+        window.addEventListener("resize", this.updateScreenSize, false);
+    },
+
+    handleSwipe (event) {
+        var pageIndex = this.state.pageIndex + event.sign;
+        this.setState({ pageIndex: pageIndex });
+
+        clearTimeout(this.animationTimer);
+        this.animationTimer = setTimeout(() => {
+            this.setState({ previousPageIndex: pageIndex });
+        }, ANIMATION_DURATION);
+    },
+
+    render () {
+        var pages = [{
+            text: "foo",
+        }, {
+            text: "bar",
+        }];
+
+        var width = Math.min(this.state.screenWidth, MAX_WIDTH);
+        var pageWidth = width - MARGIN * 2;
+        var height = Math.ceil(pageWidth / 21 * 9);
+
+        return (
+            <Carousel
+                pages={pages}
+                pageIndex={this.state.pageIndex}
+                previousPageIndex={this.state.previousPageIndex}
+                width={width}
+                height={height}
+                embedWidth={MARGIN}
+                embedHeight={0}
+                pageView={Page}
+                pageWidth={pageWidth}
+                pageHeight={height}
+                onSwiped={this.handleSwipe}
+                loop={true}
+            />
+        );
+    },
+});
+
+React.initializeTouchEvents();
+React.renderComponent(MyCarousel(), document.getElementById("example"));
+
+// expose for React devtools.
+window.React = React;
+</code></pre><pre class="language-css code-examples__code"><code class="language-css">.merry-go-round
+    position: relative
+
+    &__slider
+        position: relative
+        width: 9999px
+
+        &--moving
+            transition: all 0.4s ease-out
+
+    &__page
+        position: absolute
+        float: left
+
+.page
+    width: 100%
+    height: 100%
+
+// just to make the boxes look more interesting :)
+.box
+    float: left
+    display: inline-block
+    width: 23%
+    height: 30%
+    border: 2px solid black
+    margin: 0 1% 1.5333%
+    box-shadow: 0 0 40px #000 inset
+    text-align: center
+    color: #fff
+    line-height: 12vw
+</code></pre></div><div><h1 id="basic-mobile-carousel">Basic Mobile Carousel</h1>
+<p>This features a basic example of a swipeable mobile carousel with multiple items on a page, with a slight reveal of the surrounding pages and looping.</p>
+</div><script src="/merry-go-round/assets/js/basic-example-b5f4c4a43d070ee72077.js"></script></div><script src="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css"><script src="/merry-go-round/assets/js/app-b5f4c4a43d070ee72077.js"></script></body></html>

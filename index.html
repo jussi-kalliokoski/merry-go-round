@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head><title>merry-go-round</title><link rel="stylesheet" href="/merry-go-round/assets/css/app-01c6ee16.css"></head><body><div class="wrap"><div><h1 id="merry-go-round-">Merry-go-Round!</h1>
+<p><a href="https://travis-ci.org/jussi-kalliokoski/merry-go-round"><img src="https://travis-ci.org/jussi-kalliokoski/merry-go-round.svg" alt="Build Status"></a><br><a href="https://coveralls.io/r/jussi-kalliokoski/merry-go-round"><img src="https://img.shields.io/coveralls/jussi-kalliokoski/merry-go-round.svg" alt="Coverage Status"></a></p>
+<p>Merry-go-Round is a <a href="http://facebook.github.io/react/">React</a>-based component library for building amazing carousels!</p>
+<h3 id="flexibility">Flexibility</h3>
+<p>Just tried that other carousel component and noticed it just couldn’t reach the grandeous design you were going for? The goal of Merry-go-Round is to not be a complete solution, but a highly reusable building block for you to create the carousels you’ve always dreamed for, so don’t let reality get in your way! You go build what you want, Merry-go-Round will provide you the tools.</p>
+<h3 id="responsiveness">Responsiveness</h3>
+<p>In today’s world, your carousels have to work everywhere. No matter if it’s a square screen or a device controlled with a pen, Merry-go-Round will work in it. Even IE8 is supported! Because Merry-go-Round promotes using markers instead of page indices for storing carousel states, your users also never have to go back to the page they were on when they rotate the screen, since even if the paging of the content changes in a different layout, the marker still points to the same point in your list of items.</p>
+<h3 id="performance">Performance</h3>
+<p>Your users have grown to expect a native-like fast experience, and with the power of React and Merry-go-Round, you can give it to them. Merry-go-Round lets you leverage CSS animations and transitions and provides you hooks for telling when these animations are over, so that you can retain a minimal memory and CPU fingerprint. Internally, Merry-go-Round uses ring buffers and occlusion culling to reuse views and render only what’s needed at given moment.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>To get started, grab the latest copy of Merry-go-Round:</p>
+<h3 id="npm">npm</h3>
+<pre><code class="lang-sh">$ npm install --save merry-go-round
+</code></pre>
+<h3 id="bower">bower</h3>
+<pre><code class="lang-sh">$ bower install --save merry-go-round
+</code></pre>
+<h2 id="browser-support">Browser Support</h2>
+<p>Courtesy of the test suite that’s run on <a href="https://www.browserstack.com/">BrowserStack</a>, the officially supported browsers are as follows:</p>
+<ul>
+<li>Chrome: Latest stable version.</li>
+<li>Firefox: Latest stable version.</li>
+<li>Opera: Latest stable version.</li>
+<li>Internet Explorer: 8, 9, 10, 11.</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>Merry-go-Round exposes two components, <code>Carousel</code> and <code>Container</code>:</p>
+<h3 id="carousel">Carousel</h3>
+<p>This is the core component, featuring a slider and page rendering engine for a full-fledged carousel.</p>
+<pre><code class="lang-javascript">var Carousel = require(&quot;merry-go-round/Carousel&quot;);
+</code></pre>
+<h4 id="props">Props</h4>
+<ul>
+<li><code>pages</code> (Array): The list of pages to use for rendering.</li>
+<li><code>pageView</code> (React class): The React class to use for rendering the pages.</li>
+<li><code>pageIndex</code> (Integer, optional, defaults to <code>0</code>): The current page index.</li>
+<li><code>previousPageIndex</code> (Integer, optional, defaults to <code>0</code>): The previous page index. Used for syncing with animations to determine which pages need to be shown during the animation, which will be discarded after and so on.</li>
+<li><code>loop</code> (Boolean, optional, defaults to <code>false</code>): Whether to loop the pages so that before first page comes the last page and after last page comes the first page.</li>
+<li><code>onSwiped</code> (Function, optional, defaults to no-op): A callback for when the carousel is swiped. The event object has a <code>sign</code> property that tells whether the user swiped left (<code>-1</code>) or right (<code>1</code>).</li>
+<li><code>swipeThreshold</code> (Number, optional, defaults to 10): The number of pixels the swipe needs to cover before its registered. It is recommended to set this based on the screen dimensions.</li>
+<li><code>swipeCancelThreshold</code> (Number, optional, defaults to 10): The number of pixels the swipe needs to move in crossing direction before it’s canceled. It is recommended to set this based on the screen dimensions.</li>
+<li><code>baseClass</code> (String, optional, defaults to <code>merry-go-round</code>): The base class to use when rendering components.</li>
+<li><code>cacheSize</code> (Integer, optional, defaults to <code>1</code>): The number of pages to render around the pages that must be rendered. This is useful for example if you partially reveal multiple pages at the same time.</li>
+<li><code>embedWidth</code> (Integer, optional, defaults to <code>0</code>): The number of pixels to “embed” into the horizontally. Basically reverses the container’s padding, so that you can have things such as partially revealed pages that come outside the margin.</li>
+<li><code>embedHeight</code> (Integer, optional, defaults to <code>0</code>): The number of pixels to “embed” into the vertically. Basically reverses the container’s padding, so that you can have things such as partially revealed pages that come outside the margin.</li>
+<li><code>renderEmptyPages</code> (Boolean, optional, defaults to <code>false</code>): Whether to render empty pages. This is useful when you want to have special views for pages that don’t have any content.</li>
+</ul>
+<h3 id="container">Container</h3>
+<p>The Container is a general purpose mixin for creating containers of the Carousels. It provides some useful functionality such as auto-rotation, marker-based page navigation and passing on the carousel-related events to your controller view.</p>
+<h4 id="props">Props</h4>
+<ul>
+<li><code>marker</code> (Any, optional): The marker of the current page.</li>
+<li><code>previousMarker</code> (Any, optional): The marker of the previous page. Used for syncing with animations to determine which pages need to be shown during the animation, which will be discarded after as well as determining the quickest path to the next page (jumping over the loop might be closer than going all the way back to the beginning).</li>
+<li><code>onPageChanged</code> (Function): An event called when the page of the carousel needs to change. The <code>marker</code> property on the event object determines the page where the carousel wants to move to.</li>
+<li><code>autoRotate</code> (Boolean, optional): If true, the carousel will automatically rotate within specified intervals using <code>onPageChanged</code> event.</li>
+<li><code>autoRotateInterval</code> (Integer, optional): The interval between auto-rotation events, in milliseconds.</li>
+<li><code>autoRotateDirection</code> (String, optional): <code>left</code> or <code>right</code> based on the direction you want to automatically rotate to.</li>
+<li><code>loop</code> (Boolean, optional): Whether to loop the pages so that before first page comes the last page and after last page comes the first page.</li>
+</ul>
+<h4 id="expected-methods">Expected Methods</h4>
+<p>These are methods that are expected to be implemented by classes using this mixin:</p>
+<h5 id="-page-"><code>page()</code></h5>
+<p>Returns the array of pages available for rendering currently. If these pages are objects that have a property <code>items</code>, that contains objects that have <code>id</code> properties assigned to them, the marker-based paging will work out of the box.</p>
+<h4 id="methods">Methods</h4>
+<h5 id="-isonfirstpage-"><code>isOnFirstPage()</code></h5>
+<p>Returns true if the current marker is on the first page of the specified pages.</p>
+<h6 id="arguments">Arguments</h6>
+<ul>
+<li><code>pages</code> The array of pages.</li>
+</ul>
+<h5 id="-isonlastpage-"><code>isOnLastPage()</code></h5>
+<p>Returns true if the current marker is on the last page of the specified pages.</p>
+<h6 id="arguments">Arguments</h6>
+<ul>
+<li><code>pages</code> The array of pages.</li>
+</ul>
+<h5 id="-handlemouseleave-"><code>handleMouseLeave()</code></h5>
+<p>A prebuilt event handler for an onMouseLeave. Re-enables auto-rotation when the user is no longer interacting with the container.</p>
+<h5 id="-handlemouseenter-"><code>handleMouseEnter()</code></h5>
+<p>A prebuilt event handler for an onMouseEnter. Disables auto-rotation while the user is interacting with the container.</p>
+<h5 id="-calculatepagestate-"><code>calculatePageState()</code></h5>
+<p>Returns an object containing the current (<code>index</code>) and previous (<code>previousIndex</code>) page index of the child carousel, based on the markers and given pages. When looping is enabled, this will find the closest path to the current marker from the previous marker.</p>
+<h6 id="arguments">Arguments</h6>
+<ul>
+<li><code>pages</code> (Array): The array of pages to use for finding the index.</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are most welcome! If you’re having problems and don’t know why, search the issues to see if someone’s had the same issue. If not, file a new issue so we can solve it together and leave the solution visible to others facing the same problem as well. If you find bugs, file an issue, preferably with good reproduction steps. If you want to be totally awesome, you can make a PR to go with your issue, containing a new test case that fails currently!</p>
+<h3 id="development">Development</h3>
+<p>Development is pretty straightforward, it’s all JS and the standard node stuff works:</p>
+<p>To install dependencies:</p>
+<pre><code class="lang-bash">$ npm install
+</code></pre>
+<p>To run the tests:</p>
+<pre><code class="lang-bash">$ npm test
+</code></pre>
+<p>Then just make your awesome feature and a PR for it. Don’t forget to file an issue first, or start with an empty PR so others can see what you’re doing and discuss it so there’s a a minimal amount of wasted effort.</p>
+<p>Do note that the test coverage is currently a whopping 100%. Let’s keep it that way! Remember: if it’s not in the requirements specification (i.e. the tests), it’s not needed, and thus unnecessary bloat.</p>
+</div></div><script src="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css"><script src="/merry-go-round/assets/js/app-b5f4c4a43d070ee72077.js"></script></body></html>
