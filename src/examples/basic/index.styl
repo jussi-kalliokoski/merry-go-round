@@ -1,0 +1,30 @@
+.merry-go-round
+    position: relative
+
+    &__slider
+        position: relative
+        width: 9999px
+
+        &--moving
+            transition: all 0.4s ease-out
+
+    &__page
+        position: absolute
+        float: left
+
+.page
+    width: 100%
+    height: 100%
+
+// just to make the boxes look more interesting :)
+.box
+    float: left
+    display: inline-block
+    width: 23%
+    height: 30%
+    border: 2px solid black
+    margin: 0 1% 1.5333%
+    box-shadow: 0 0 40px #000 inset
+    text-align: center
+    color: #fff
+    line-height: 12vw

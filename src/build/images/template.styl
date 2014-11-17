@@ -1,0 +1,17 @@
+<% _.each(images, function (image) { %>
+<%= image.selector %> {
+    display: inline-block
+    width: <%= image.width %>px
+    height: <%= image.height %>px
+    background-image: url('../images/<%= image.assetName %>')
+    background-size: 100% 100%
+
+<% _.each(image.renditions, function (rendition) { %>
+    @media only screen and (-webkit-min-device-pixel-ratio: <%= rendition.minResolution %>),
+    only screen and (-o-min-device-pixel-ratio: <%= rendition.minResolutionAsFraction %>),
+    only screen and (min-resolution: <%= rendition.minResolution %>dppx) {
+        background-image: url('../images/<%= rendition.assetName %>')
+    }
+<% }); %>
+}
+<% }); %>
