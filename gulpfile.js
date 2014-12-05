@@ -11,6 +11,7 @@ var spawn = require("child_process").spawn;
 
 var files = [
     "./Carousel/index.js",
+    "./Fader/index.js",
     "./CarouselMixin/index.js",
     "./Container/index.js",
     "./utils/*.js",
