@@ -49,7 +49,7 @@
     "karma": "^0.12.19",
     "karma-browserstack-launcher": "^0.1.1",
     "karma-cli": "0.0.4",
-    "karma-coverage": "^0.2.5",
+    "karma-coverage": "0.2.5",
     "karma-expect": "^1.1.0",
     "karma-mocha": "^0.1.6",
     "karma-mocha-reporter": "^0.2.8",
