@@ -2,47 +2,14 @@
 
 var React = require("react");
 var Swipable = require("../Swipable");
-var range = require("../utils/range");
+var CarouselMixin = require("../CarouselMixin");
 var getClassName = require("../utils/getClassName");
 var setPosition = require("../utils/setPosition").setPosition;
-var noop = require("../utils/noop");
 
 module.exports = React.createClass({
     displayName: "Carousel",
 
-    mixins: [Swipable],
-
-    propTypes: {
-        baseClass: React.PropTypes.string,
-        cacheSize: React.PropTypes.number,
-        embedWidth: React.PropTypes.number,
-        embedHeight: React.PropTypes.number,
-        pageIndex: React.PropTypes.number,
-        previousPageIndex: React.PropTypes.number,
-        loop: React.PropTypes.bool,
-        renderEmptyPages: React.PropTypes.bool,
-        pages: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-        pageView: React.PropTypes.func.isRequired,
-        onSwiped: React.PropTypes.func,
-        swipeThreshold: React.PropTypes.number,
-        swipeCancelThreshold: React.PropTypes.number,
-    },
-
-    getDefaultProps: function () {
-        return {
-            baseClass: "merry-go-round",
-            cacheSize: 1,
-            embedWidth: 0,
-            embedHeight: 0,
-            pageIndex: 0,
-            previousPageIndex: 0,
-            loop: false,
-            renderEmptyPages: false,
-            onSwiped: noop,
-            swipeThreshold: 10,
-            swipeCancelThreshold: 10,
-        };
-    },
+    mixins: [Swipable, CarouselMixin],
 
     isMoving: function () {
         return this.props.pageIndex !== this.props.previousPageIndex;
@@ -56,62 +23,12 @@ module.exports = React.createClass({
         };
     },
 
-    isIndexWithinBounds: function (index) {
-        return index >= 0 && index < this.props.pages.length;
-    },
-
-    normalizeIndex: function (index) {
-        if ( !this.props.loop ) { return index; }
-
-        while ( index < 0 ) {
-            index += this.props.pages.length;
-        }
-
-        return index % this.props.pages.length;
-    },
-
-    isIndexInView: function (index, viewIndex) {
-        return Math.abs(index - viewIndex) <= this.props.cacheSize;
-    },
-
-    calculateBuffers: function () {
-        var first = Math.min(this.props.previousPageIndex, this.props.pageIndex) - this.props.cacheSize;
-        var last = Math.max(this.props.previousPageIndex, this.props.pageIndex) + this.props.cacheSize;
-        var indices = range(first, last + 1);
-
-        return indices.map(function calculateBuffer (index) {
-            return {
-                index: index,
-                pageIndex: this.normalizeIndex(index),
-                willBeDiscarded: !this.isIndexInView(this.props.pageIndex, index),
-                isNew: !this.isIndexInView(this.props.previousPageIndex, index),
-            };
-        }.bind(this));
-    },
-
-    renderPages: function () {
-
-        var PageView = this.props.pageView;
-        var buffers = this.calculateBuffers();
-
-        return buffers.map(function renderBuffer (buffer) {
-            var pageView;
-
-            if ( this.props.renderEmptyPages || this.isIndexWithinBounds(buffer.pageIndex) ) {
-                pageView = PageView({
-                    page: this.props.pages[buffer.pageIndex],
-                    index: buffer.pageIndex,
-                    willBeDiscarded: buffer.willBeDiscarded,
-                    isNew: buffer.isNew,
-                });
-            }
-
-            return React.DOM.div({
-                className: this.props.baseClass + "__page",
-                key: buffer.index,
-                style: this.calculatePageStyle(buffer.index),
-            }, pageView);
-        }.bind(this));
+    renderPage: function (buffer, pageView) {
+        return React.DOM.div({
+            className: this.props.baseClass + "__page",
+            key: buffer.index,
+            style: this.calculatePageStyle(buffer.index),
+        }, pageView);
     },
 
     calculateSliderStyle: function () {

@@ -11,6 +11,7 @@
     "Carousel",
     "Container",
     "Swipable",
+    "CarouselMixin",
     "utils"
   ],
   "scripts": {
