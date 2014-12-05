@@ -44,7 +44,7 @@ describe("Carousel", function () {
         return [].slice.call(getElementsByClassName(element, "merry-go-round__page"));
     }
 
-    function expectPages (list) {
+    function expectBufferedPageIndicesToMatch (list) {
         expectChildrenByClassName("merry-go-round__page", list.length);
         var actual = getPages().map(function (page) {
             if ( page.childNodes.length === 0 ) {
@@ -133,7 +133,7 @@ describe("Carousel", function () {
                 cacheSize: 3,
             });
 
-            expectPages([
+            expectBufferedPageIndicesToMatch([
                 null,
                 null,
                 null,
@@ -147,7 +147,7 @@ describe("Carousel", function () {
         it("should default to `1`", function () {
             prepare();
 
-            expectPages([
+            expectBufferedPageIndicesToMatch([
                 null,
                 0,
                 1,
@@ -228,7 +228,7 @@ describe("Carousel", function () {
             });
 
             it("should render all pages between current and previous, plus `cacheSize`", function () {
-                expectPages([
+                expectBufferedPageIndicesToMatch([
                     null,
                     0,
                     1,
@@ -252,7 +252,7 @@ describe("Carousel", function () {
             });
 
             it("should render only pages determined by `cacheSize`", function () {
-                expectPages([
+                expectBufferedPageIndicesToMatch([
                     2,
                     3,
                     null,
@@ -315,7 +315,7 @@ describe("Carousel", function () {
             });
 
             it("should ring buffer the `pages` array", function () {
-                expectPages([
+                expectBufferedPageIndicesToMatch([
                     1,
                     2,
                     3,

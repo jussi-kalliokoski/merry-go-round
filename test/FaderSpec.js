@@ -44,7 +44,7 @@ describe("Fader", function () {
         return [].slice.call(getElementsByClassName(element, "merry-go-round__page"));
     }
 
-    function expectPages (list) {
+    function expectBufferedPageIndicesToMatch (list) {
         expectChildrenByClassName("merry-go-round__page", list.length);
         var actual = getPages().map(function (page) {
             if ( page.childNodes.length === 0 ) {
@@ -116,7 +116,7 @@ describe("Fader", function () {
                 cacheSize: 3,
             });
 
-            expectPages([
+            expectBufferedPageIndicesToMatch([
                 null,
                 null,
                 null,
@@ -130,7 +130,7 @@ describe("Fader", function () {
         it("should default to `1`", function () {
             prepare();
 
-            expectPages([
+            expectBufferedPageIndicesToMatch([
                 null,
                 0,
                 1,
@@ -223,7 +223,7 @@ describe("Fader", function () {
             });
 
             it("should ring buffer the `pages` array", function () {
-                expectPages([
+                expectBufferedPageIndicesToMatch([
                     1,
                     2,
                     3,
