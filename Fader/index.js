@@ -4,7 +4,6 @@ var React = require("react");
 var Swipable = require("../Swipable");
 var CarouselMixin = require("../CarouselMixin");
 var getClassName = require("../utils/getClassName");
-var noop = require("../utils/noop");
 
 module.exports = React.createClass({
     displayName: "Carousel",
