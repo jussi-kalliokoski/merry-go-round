@@ -4,22 +4,17 @@ var React = require("react");
 var Swipable = require("../Swipable");
 var CarouselMixin = require("../CarouselMixin");
 var getClassName = require("../utils/getClassName");
-var setPosition = require("../utils/setPosition").setPosition;
 
 module.exports = React.createClass({
     displayName: "Carousel",
 
     mixins: [Swipable, CarouselMixin],
 
-    isMoving: function () {
-        return this.props.pageIndex !== this.props.previousPageIndex;
-    },
-
     calculatePageStyle: function (index) {
         return {
             width: this.props.pageWidth + "px",
             height: this.props.pageHeight + "px",
-            left: (this.props.pageWidth * index) + "px",
+            opacity: index === this.props.pageIndex ? "1.0" : "0.0",
         };
     },
 
@@ -29,27 +24,6 @@ module.exports = React.createClass({
             key: buffer.index,
             style: this.calculatePageStyle(buffer.index),
         }, pageView);
-    },
-
-    calculateSliderStyle: function () {
-        var style = {
-            height: (this.props.pageHeight) + "px",
-            left: Math.floor((this.props.width - this.props.pageWidth) / 2) + "px",
-            top: Math.floor((this.props.height - this.props.pageHeight) / 2) + "px",
-        };
-
-        var x = this.props.pageIndex * -this.props.pageWidth;
-        var y = 0;
-
-        setPosition(style, x, y);
-
-        return style;
-    },
-
-    getSliderClassName: function () {
-        return getClassName(this.props.baseClass + "__slider", {
-            moving: this.isMoving(),
-        });
     },
 
     calculateStyle: function () {
@@ -75,10 +49,7 @@ module.exports = React.createClass({
             onTouchCancel: this.handleTouchCancel,
             style: this.calculateStyle(),
         },
-            React.DOM.div({
-                className: this.getSliderClassName(),
-                style: this.calculateSliderStyle(),
-            }, this.renderPages())
+            this.renderPages()
         );
     },
 });
