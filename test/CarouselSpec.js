@@ -411,7 +411,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
 
@@ -426,7 +426,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
 
@@ -440,7 +440,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
 
@@ -454,7 +454,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
 
@@ -468,7 +468,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
 
@@ -490,7 +490,7 @@ describe("Carousel", function () {
             });
 
             it("should not do anything", function () {
-                expect(onSwiped.called).to.not.be.ok();
+                expect(onSwiped.called).to.equal(false);
             });
         });
     });
