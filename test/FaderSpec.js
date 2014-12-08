@@ -2,8 +2,8 @@
 
 var React = require("react/addons");
 
-describe("Carousel", function () {
-    var Carousel = require("../Carousel");
+describe("Fader", function () {
+    var Fader = require("../Fader");
 
     var DummyComponent = React.createClass({
         render: function () {
@@ -57,22 +57,6 @@ describe("Carousel", function () {
         expect(actual).to.eql(list);
     }
 
-    function expectSliderPosition (x, y) {
-        x += "px";
-        y += "px";
-
-        var slider = getElementsByClassName(element, "merry-go-round__slider")[0];
-        var style = slider.style;
-
-        var transform = "translate(" + style.marginLeft + ", " + style.marginTop + ")";
-
-        if ( /(translate\(-?\d+px, -?\d+px\))/.test(slider.getAttribute("style")) ) {
-            transform = RegExp.$1;
-        }
-
-        expect(transform).to.equal("translate(" + x + ", " + y + ")");
-    }
-
     function prepare (options) {
         element = document.createElement("div");
         options = options || {};
@@ -82,7 +66,7 @@ describe("Carousel", function () {
                 options[key] = defaults[key];
             }
         });
-        component = Carousel(options);
+        component = Fader(options);
         React.renderComponent(component, element);
     }
 
@@ -104,7 +88,7 @@ describe("Carousel", function () {
     });
 
     it("should exist", function () {
-        expect(Carousel).to.be.ok();
+        expect(Fader).to.be.ok();
     });
 
     describe("`baseClass`", function () {
@@ -114,7 +98,6 @@ describe("Carousel", function () {
             });
 
             expectChildByClassName(baseClass);
-            expectChildByClassName(baseClass + "__slider");
             expectChildByClassName(baseClass + "__page");
         }
 
@@ -161,9 +144,9 @@ describe("Carousel", function () {
             defaults.pageHeight = 13;
         });
 
-        function expectPagePositions (expected) {
+        function expectPageOpacities (expected) {
             var actual = getPages().map(function (page) {
-                return parseInt(page.style.left, 10);
+                return parseFloat(page.style.opacity);
             });
 
             expect(actual).to.eql(expected);
@@ -183,11 +166,11 @@ describe("Carousel", function () {
                 });
             });
 
-            it("the locations should be correct", function () {
-                expectPagePositions([
-                    -11,
-                    0,
-                    11,
+            it("the opacities should be correct", function () {
+                expectPageOpacities([
+                    0.0,
+                    1.0,
+                    0.0,
                 ]);
             });
 
@@ -204,94 +187,19 @@ describe("Carousel", function () {
                 });
             });
 
-            it("the locations should be correct", function () {
-                expectPagePositions([
-                    11,
-                    22,
-                    33,
+            it("the opacities should be correct", function () {
+                expectPageOpacities([
+                    0.0,
+                    1.0,
+                    0.0,
                 ]);
-            });
-        });
-    });
-
-    describe("slider", function () {
-        describe("when moving", function () {
-            beforeEach(function () {
-                prepare({
-                    pageIndex: 3,
-                    previousPageIndex: 0,
-                });
-            });
-
-            it("should have a `--moving` class", function () {
-                expectChildByClassName("merry-go-round__slider--moving");
-            });
-
-            it("should render all pages between current and previous, plus `cacheSize`", function () {
-                expectBufferedPageIndicesToMatch([
-                    null,
-                    0,
-                    1,
-                    2,
-                    3,
-                    null,
-                ]);
-            });
-        });
-
-        describe("when not moving", function () {
-            beforeEach(function () {
-                prepare({
-                    pageIndex: 3,
-                    previousPageIndex: 3,
-                });
-            });
-
-            it("should not have a `--moving` class", function () {
-                expectChildrenByClassName("merry-go-round__slider--moving", 0);
-            });
-
-            it("should render only pages determined by `cacheSize`", function () {
-                expectBufferedPageIndicesToMatch([
-                    2,
-                    3,
-                    null,
-                ]);
-            });
-        });
-
-        describe("when on page `0`", function () {
-            beforeEach(function () {
-                prepare({
-                    pageWidth: 11,
-                    pageHeight: 17,
-                });
-            });
-
-            it("should be in the right place", function () {
-                expectSliderPosition(0, 0);
-            });
-        });
-
-        describe("when on page `5`", function () {
-            beforeEach(function () {
-                prepare({
-                    pageWidth: 11,
-                    pageHeight: 17,
-                    pageIndex: 5,
-                    previousPageIndex: 5,
-                });
-            });
-
-            it("should be in the right place", function () {
-                expectSliderPosition(-55, 0);
             });
         });
     });
 
     describe("when provided an empty `pages` array", function () {
         it("should render as an empty div", function () {
-            var html = React.renderComponentToStaticMarkup(Carousel({
+            var html = React.renderComponentToStaticMarkup(Fader({
                 pages: [],
                 pageView: DummyComponent,
             }));

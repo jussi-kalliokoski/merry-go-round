@@ -44,7 +44,7 @@ Courtesy of the test suite that's run on [BrowserStack](https://www.browserstack
 
 ## Usage
 
-Merry-go-Round exposes two components, `Carousel` and `Container`:
+Merry-go-Round exposes three components, `Carousel`, `Fader`, and `Container`:
 
 ### Carousel
 
@@ -69,6 +69,10 @@ var Carousel = require("merry-go-round/Carousel");
 * `embedWidth` (Integer, optional, defaults to `0`): The number of pixels to "embed" into the horizontally. Basically reverses the container's padding, so that you can have things such as partially revealed pages that come outside the margin.
 * `embedHeight` (Integer, optional, defaults to `0`): The number of pixels to "embed" into the vertically. Basically reverses the container's padding, so that you can have things such as partially revealed pages that come outside the margin.
 * `renderEmptyPages` (Boolean, optional, defaults to `false`): Whether to render empty pages. This is useful when you want to have special views for pages that don't have any content.
+
+### Fader
+
+The Fader is otherwise identical to the Carousel component and implements the same API, but instead of vertically sliding the pages, the pages fade in and out.
 
 ### Container
 

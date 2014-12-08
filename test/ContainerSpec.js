@@ -281,7 +281,7 @@ describe("Container", function () {
             });
 
             it("should be started", function () {
-                expect(container.startAutoRotate.called).to.be.ok();
+                expect(container.startAutoRotate.called).to.equal(true);
             });
         });
 
@@ -292,7 +292,7 @@ describe("Container", function () {
             });
 
             it("should be stopped", function () {
-                expect(container.stopAutoRotate.called).to.be.ok();
+                expect(container.stopAutoRotate.called).to.equal(true);
             });
         });
 
@@ -303,7 +303,7 @@ describe("Container", function () {
             });
 
             it("should be started", function () {
-                expect(container.startAutoRotate.called).to.be.ok();
+                expect(container.startAutoRotate.called).to.equal(true);
             });
         });
 
@@ -314,7 +314,7 @@ describe("Container", function () {
             });
 
             it("should be stopped", function () {
-                expect(container.stopAutoRotate.called).to.be.ok();
+                expect(container.stopAutoRotate.called).to.equal(true);
             });
         });
 

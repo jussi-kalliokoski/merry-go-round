@@ -9,8 +9,10 @@
   "files": [
     "index.js",
     "Carousel",
+    "Fader",
     "Container",
     "Swipable",
+    "CarouselMixin",
     "utils"
   ],
   "scripts": {
