@@ -15,6 +15,7 @@ module.exports = React.createClass({
             width: this.props.pageWidth + "px",
             height: this.props.pageHeight + "px",
             opacity: index === this.props.pageIndex ? "1.0" : "0.0",
+            zIndex: this.props.zIndexMax - Math.abs(index - this.props.pageIndex),
         };
     },
 
