@@ -24,7 +24,7 @@ module.exports = React.createClass({
     },
 
     renderPage: function (buffer, pageView) {
-        return React.DOM.div({
+        return React.createElement("div", {
             className: this.props.baseClass + "__page",
             key: buffer.index,
             style: this.calculatePageStyle(buffer.index),
@@ -64,10 +64,10 @@ module.exports = React.createClass({
     render: function () {
         if ( this.props.pages.length === 0 ) {
             // (jussi-kalliokoski): Nothing to render. Avoids infinite loop in calculateBuffers().
-            return React.DOM.div();
+            return React.createElement("div");
         }
 
-        return React.DOM.div({
+        return React.createElement("div", {
             className: this.props.baseClass,
             onTouchStart: this.handleTouchStart,
             onTouchMove: this.handleTouchMove,
@@ -75,7 +75,7 @@ module.exports = React.createClass({
             onTouchCancel: this.handleTouchCancel,
             style: this.calculateStyle(),
         },
-            React.DOM.div({
+            React.createElement("div", {
                 className: this.getSliderClassName(),
                 style: this.calculateSliderStyle(),
             }, this.renderPages())

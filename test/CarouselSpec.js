@@ -7,7 +7,7 @@ describe("Carousel", function () {
 
     var DummyComponent = React.createClass({
         render: function () {
-            return React.DOM.div({
+            return React.createElement("div", {
                 className: "dummy",
             }, this.props.page.index);
         },
@@ -82,8 +82,8 @@ describe("Carousel", function () {
                 options[key] = defaults[key];
             }
         });
-        component = Carousel(options);
-        React.renderComponent(component, element);
+        component = React.createElement(Carousel, options);
+        React.render(component, element);
     }
 
     beforeEach(function () {
@@ -291,7 +291,7 @@ describe("Carousel", function () {
 
     describe("when provided an empty `pages` array", function () {
         it("should render as an empty div", function () {
-            var html = React.renderComponentToStaticMarkup(Carousel({
+            var html = React.renderToStaticMarkup(React.createElement(Carousel, {
                 pages: [],
                 pageView: DummyComponent,
             }));

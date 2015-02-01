@@ -78,7 +78,7 @@ var CarouselMixin = {
             var pageView;
 
             if ( this.props.renderEmptyPages || this.isIndexWithinBounds(buffer.pageIndex) ) {
-                pageView = PageView({
+                pageView = React.createElement(PageView, {
                     page: this.props.pages[buffer.pageIndex],
                     index: buffer.pageIndex,
                     willBeDiscarded: buffer.willBeDiscarded,

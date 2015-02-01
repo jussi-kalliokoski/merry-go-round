@@ -7,7 +7,7 @@ describe("Fader", function () {
 
     var DummyComponent = React.createClass({
         render: function () {
-            return React.DOM.div({
+            return React.createElement("div", {
                 className: "dummy",
             }, this.props.page.index);
         },
@@ -66,8 +66,8 @@ describe("Fader", function () {
                 options[key] = defaults[key];
             }
         });
-        component = Fader(options);
-        React.renderComponent(component, element);
+        component = React.createElement(Fader, options);
+        React.render(component, element);
     }
 
     beforeEach(function () {
@@ -199,7 +199,7 @@ describe("Fader", function () {
 
     describe("when provided an empty `pages` array", function () {
         it("should render as an empty div", function () {
-            var html = React.renderComponentToStaticMarkup(Fader({
+            var html = React.renderToStaticMarkup(React.createElement(Fader, {
                 pages: [],
                 pageView: DummyComponent,
             }));

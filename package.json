@@ -59,7 +59,7 @@
     "karma-sinon": "^1.0.3",
     "lcov-result-merger": "^1.0.0",
     "mocha": "^1.21.3",
-    "react": "^0.11.1",
+    "react": "^0.12.2",
     "sinon": "^1.10.3",
     "vinyl-source-stream": "^0.1.1"
   }
